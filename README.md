@@ -18,6 +18,8 @@ A data provenance framework for building better deep learning computer vision pr
 [![Conference](http://img.shields.io/badge/AnyConference-year-4b44ce.svg)](https://papers.nips.cc/paper/2020)
 
 <br>
+  
+Click on [<kbd>Use this template</kbd>](https://github.com/ashleve/lightning-hydra-template/generate) to initialize new repository.
 
 </div>
 
