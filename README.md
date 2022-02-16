@@ -19,7 +19,7 @@ A data provenance framework for building better deep learning computer vision pr
 
 <br>
   
-Click on [<kbd>Use this template</kbd>](https://github.com/ashleve/lightning-hydra-template/generate) to initialize new repository.
+Click on [<kbd>Use this template</kbd>](https://github.com/deepseek-eoghan/journeycv/generate) to initialize new repository.
 
 </div>
 
