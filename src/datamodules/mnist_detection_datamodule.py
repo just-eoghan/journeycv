@@ -3,21 +3,22 @@ import os
 from typing import Optional, Tuple
 
 import albumentations as A
-import boto3
 import torch
 from albumentations.pytorch.transforms import ToTensorV2
 from pytorch_lightning import LightningDataModule
 from torch.utils import data
 from torch.utils.data import ConcatDataset, DataLoader, Dataset, Subset, random_split
-from torchvision import datasets, transforms
-from torchvision.datasets import CocoDetection
 from tqdm import tqdm
+from urllib import request
+import pathlib
+import pickle
+import gzip
+import numpy as np
 
-from src.datamodules.datasets.thermal_dataset import ThermalDataset
+from src.datamodules.datasets.mnist_detection_dataset import MnistDetectionDataset
 
-s3 = boto3.resource("s3")
-cw = boto3.client("cloudwatch")
-
+import src.datamodules.mnist_generate.mnist as mnist
+import src.datamodules.mnist_generate.generate_data as generate_data
 
 class Collater:
     # https://shoarora.github.io/2020/02/01/collate_fn.html
@@ -46,10 +47,16 @@ class MnistDetectionDataModule(LightningDataModule):
     def __init__(
         self,
         data_dir: str = "data/mnist_detection_data/",
-        batch_size: int = 64,
+        batch_size: int = 4,
         num_workers: int = 0,
         pin_memory: bool = False,
-        num_classes: int = 10
+        num_classes: int = 11,
+        num_generated_train: int = 10000,
+        num_generated_test: int = 1000,
+        generated_min_digit_size: int = 15,
+        generated_max_digit_size: int = 100,
+        generated_image_size: int = 300,
+        max_digits_per_generated_image: int = 20,
     ):
         super().__init__()
 
@@ -62,7 +69,7 @@ class MnistDetectionDataModule(LightningDataModule):
         self.collater = Collater()
 
         # self.dims is returned when you call datamodule.size()
-        self.dims = None
+        self.dims = (1, 300, 300)
         self.data_train: Optional[Dataset] = None
         self.data_val: Optional[Dataset] = None
         self.data_test: Optional[Dataset] = None
@@ -74,9 +81,26 @@ class MnistDetectionDataModule(LightningDataModule):
     def prepare_data(self):
         """Download data if needed. This method is called only from a single GPU.
         Do not use it to assign state (self.x = y)."""
-        pass
+        if not os.path.exists(self.hparams.data_dir):
+            print("downloading dataset")
+            X_train, Y_train, X_test, Y_test = mnist.load()
+            for dataset, (X, Y) in zip(["train", "test"], [[X_train, Y_train], [X_test, Y_test]]):
+                num_images = self.hparams.num_generated_train if dataset == "train" else self.hparams.num_generated_test
+                generate_data.generate_dataset(
+                    dataset,
+                    pathlib.Path(self.hparams.data_dir, dataset),
+                    num_images,
+                    self.hparams.generated_max_digit_size,
+                    self.hparams.generated_min_digit_size,
+                    self.hparams.generated_image_size,
+                    self.hparams.max_digits_per_generated_image,
+                    X,
+                    Y)             
+            return 
+
 
     def setup(self, stage: Optional[str] = None):
+        x=1
         pass
 
     def train_dataloader(self):

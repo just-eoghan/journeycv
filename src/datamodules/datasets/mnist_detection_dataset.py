@@ -27,7 +27,6 @@ class MnistDetectionDataset(VisionDataset):
     def __init__(
         self,
         root: str,
-        annFile: str,
         transform: Optional[Callable] = None,
         target_transform: Optional[Callable] = None,
         transforms: Optional[Callable] = None,

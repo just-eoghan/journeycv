@@ -141,8 +141,7 @@ dmypy.json
 
 # Lightning-Hydra-Template
 configs/local/default.yaml
-data/thermal
-data/griffith.v1
+data/mnist_detection_data/
 logs/
 wandb/
 .env
