@@ -1,6 +1,6 @@
 _target_: src.models.mnist_detection_model.MnistDetectionLitModel
 
-num_classes: 10
+num_classes: 11
 lr: 0.001
 weight_decay: 0.0005
 momentum: 0.9

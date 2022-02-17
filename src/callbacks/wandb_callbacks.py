@@ -130,7 +130,6 @@ class LogBoundingBoxes(Callback):
         self.pred_boxes = []
         self.pred_labels = []
         self.scores = []
-        self.ious = []
         self.images = []
         self.gt_boxes = []
         self.gt_labels = []
@@ -161,8 +160,6 @@ class LogBoundingBoxes(Callback):
             for item in outputs["test_gt"]:
                 self.gt_boxes.append(item["boxes"])
                 self.gt_labels.append(item["labels"])
-            for iou in outputs["test_ious"]:
-                self.ious.append(iou.item())
         return
 
     def on_test_epoch_end(self, trainer, pl_module):
@@ -296,10 +293,7 @@ class LogBoundingBoxes(Callback):
                 bounding_data[img_idx].append(gtbox_image)
                 img_idx = img_idx + 1
 
-            for idx, iou in enumerate(self.ious):
-                bounding_data[idx].append(iou)
-
-            columns = ["file_name", "bbox_preds", "bbox_50", "bbox_75", "bbox_gt", "iou"]
+            columns = ["file_name", "bbox_preds", "bbox_50", "bbox_75", "bbox_gt"]
             image_pred_table = wandb.Table(data=bounding_data, columns=columns, dtype=AnyType)
 
             experiment.log({f"test_set_bbox_preds/{experiment.name}": image_pred_table})

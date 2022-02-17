@@ -23,5 +23,7 @@ Click on [<kbd>Use this template</kbd>](https://github.com/deepseek-eoghan/journ
 
 </div>
 
+Need to run $ conda install -c anaconda cython running $ pip install -r requirements.text
+
 <br><br>
 

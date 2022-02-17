@@ -8,25 +8,30 @@ defaults:
   - override /trainer: default.yaml
   - override /model: mnist_detection_model.yaml
   - override /datamodule: mnist_detection_datamodule.yaml
-  - override /callbacks: default.yaml
-  - override /logger: null
+  - override /callbacks: wandb.yaml
+  - override /logger: wandb.yaml
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 
 # name of the run determines folder name in logs
 # it's also accessed by loggers
-name: "mnist_detection_overfit_debug"
+name: "mnist_detection_experiment"
 
 seed: 100101101112115101101107046097105
 
+callbacks:
+  telegram_notification:
+    _target_: src.callbacks.whosthere_callbacks.TelegramNotification
+  stochastic_weight_averaging:
+    _target_: pytorch_lightning.callbacks.StochasticWeightAveraging
+
 trainer:
   min_epochs: 1
-  max_epochs: 10
+  max_epochs: 2
   gradient_clip_val: 0.5
+  accumulate_grad_batches: 2
+  weights_summary: "full"
 
-# model:
-  # todo
-
-# datamodule:
-   
+lr_finder: True
+batch_finder: True

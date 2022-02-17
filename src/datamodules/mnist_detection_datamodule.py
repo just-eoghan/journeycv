@@ -64,8 +64,24 @@ class MnistDetectionDataModule(LightningDataModule):
         # it also ensures init params will be stored in ckpt
         self.save_hyperparameters(logger=False)
 
-        self.transforms = None
-        self.notransforms = None
+        self.transforms = A.Compose(
+            [
+                A.Normalize(),
+                A.HorizontalFlip(p=0.5),
+                A.Blur(blur_limit=3, p=0.15),
+                ToTensorV2(),
+            ],
+            bbox_params=A.BboxParams(format="pascal_voc", label_fields=["category_ids"]),
+        )
+
+        self.notransforms = A.Compose(
+            [
+                A.Normalize(),
+                ToTensorV2(),
+            ],
+            bbox_params=A.BboxParams(format="pascal_voc", label_fields=["category_ids"]),
+        )
+
         self.collater = Collater()
 
         # self.dims is returned when you call datamodule.size()
@@ -100,14 +116,54 @@ class MnistDetectionDataModule(LightningDataModule):
 
 
     def setup(self, stage: Optional[str] = None):
-        x=1
-        pass
+        if not self.data_train and not self.data_val and not self.data_test:
+            dataset = MnistDetectionDataset(
+                self.hparams.data_dir + "train",
+                self.hparams.data_dir + "train.json",
+                transform=self.transforms,
+            )
+
+            self.data_test = MnistDetectionDataset(
+                self.hparams.data_dir + "test",
+                self.hparams.data_dir + "test.json",
+                transform=self.notransforms,
+            )
+
+            self.data_train, self.data_val = random_split(
+                dataset=dataset,
+                lengths=(int(self.hparams.num_generated_train * 0.7), int(self.hparams.num_generated_train * 0.3)),
+                generator=torch.Generator().manual_seed(42),
+            )
+
+            self.data_val.dataset.transform = self.notransforms
 
     def train_dataloader(self):
-        return 
+        return DataLoader(
+            dataset=self.data_train,
+            batch_size=self.hparams.batch_size,
+            num_workers=self.hparams.num_workers,
+            pin_memory=self.hparams.pin_memory,
+            shuffle=True,
+            # https://github.com/pytorch/vision/issues/2624#issuecomment-681811444
+            collate_fn=self.collater,
+        )
 
     def val_dataloader(self):
-        return 
+        return DataLoader(
+            dataset=self.data_val,
+            batch_size=self.hparams.batch_size,
+            num_workers=self.hparams.num_workers,
+            pin_memory=self.hparams.pin_memory,
+            shuffle=False,
+            collate_fn=self.collater,
+        )
 
     def test_dataloader(self):
-        return 
+        return DataLoader(
+            dataset=self.data_test,
+            batch_size=self.hparams.batch_size,
+            num_workers=self.hparams.num_workers,
+            pin_memory=self.hparams.pin_memory,
+            shuffle=False,
+            collate_fn=self.collater,
+        )
