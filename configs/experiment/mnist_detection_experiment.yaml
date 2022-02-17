@@ -28,10 +28,11 @@ callbacks:
 
 trainer:
   min_epochs: 1
-  max_epochs: 2
+  max_epochs: -1
   gradient_clip_val: 0.5
   accumulate_grad_batches: 2
   weights_summary: "full"
+  gpus: 1
 
 lr_finder: True
 batch_finder: True
