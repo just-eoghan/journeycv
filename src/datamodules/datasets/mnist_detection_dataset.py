@@ -1,7 +1,6 @@
 import os
 import os.path
 from typing import Any, Callable, List, Optional, Tuple
-
 import numpy as np
 import torch
 from albumentations.augmentations.bbox_utils import (
@@ -51,6 +50,9 @@ class MnistDetectionDataset(VisionDataset):
     def _load_target(self, id: int) -> List[Any]:
         return self.coco.loadAnns(self.coco.getAnnIds(id))
 
+    def _get_category_name(self, id: int) -> str:
+            return self.class_dict.get(id)
+
     def __getitem__(self, index: int) -> Tuple[Any, Any, Any]:
         id = self.ids[index]
         image, file_name = self._load_image(id)
@@ -67,13 +69,12 @@ class MnistDetectionDataset(VisionDataset):
             transformed = self.transform(
                 image=np.array(image), bboxes=bboxes, category_ids=category_ids
             )
-            # faster-rcnn wants xyxy but we have xywh so convert
-
+            
             for idx, tup in enumerate(transformed["bboxes"]):
                 transformed["bboxes"][idx] = np.array(tup)
 
             targets = {
-                "boxes": box_convert(torch.FloatTensor(transformed["bboxes"]), "xywh", "xyxy"),
+                "boxes": torch.FloatTensor(transformed["bboxes"]),
                 "labels": torch.tensor(transformed["category_ids"], dtype=torch.int64),
             }
 

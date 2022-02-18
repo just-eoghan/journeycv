@@ -7,7 +7,7 @@ num_workers: 0
 pin_memory: False
 num_generated_train: 10000
 num_generated_test: 1000
-generated_min_digit_size: 15
-generated_max_digit_size: 100
-generated_image_size: 300
-max_digits_per_generated_image: 20
+generated_min_digit_size: 20
+generated_max_digit_size: 50
+generated_image_size: 150
+max_digits_per_generated_image: 10

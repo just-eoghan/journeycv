@@ -168,6 +168,7 @@ def generate_dataset(dataset_type: str,
         ],              
     }
     image_dir.mkdir(exist_ok=True, parents=True)
+    ann_idx = 0
     for image_id in tqdm.trange(num_images, desc=f"Generating dataset, saving to: {dirpath}"):
         im = np.zeros((imsize, imsize), dtype=np.float32)
         labels = []
@@ -207,12 +208,14 @@ def generate_dataset(dataset_type: str,
         for idx, (bbox, label) in enumerate(zip(bboxes, labels)):
             annotations.append(
                 {
-                    "id": idx,
+                    "id": ann_idx,
                     "image_id": image_id,
                     "category_id": int(label),
                     "bbox": bbox
                 }
             )
+            ann_idx = ann_idx + 1
+    ann_idx = 0
     coco_json["annotations"] = annotations
     coco_json["images"] = images
     with open((str(dirpath.parent)+"/"+dataset_type+'.json'), 'w') as fp:

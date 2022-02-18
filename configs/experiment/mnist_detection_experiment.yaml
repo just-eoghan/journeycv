@@ -8,8 +8,8 @@ defaults:
   - override /trainer: default.yaml
   - override /model: mnist_detection_model.yaml
   - override /datamodule: mnist_detection_datamodule.yaml
-  - override /callbacks: wandb.yaml
-  - override /logger: wandb.yaml
+  - override /callbacks: null #wandb.yaml
+  - override /logger: null # wandb.yaml
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
@@ -31,7 +31,6 @@ trainer:
   max_epochs: -1
   gradient_clip_val: 0.5
   accumulate_grad_batches: 2
-  weights_summary: "full"
   gpus: 1
 
 lr_finder: True
