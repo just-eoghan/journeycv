@@ -8,15 +8,15 @@ defaults:
   - override /trainer: default.yaml
   - override /model: mnist_detection_model.yaml
   - override /datamodule: mnist_detection_datamodule.yaml
-  - override /callbacks: null #wandb.yaml
-  - override /logger: null # wandb.yaml
+  - override /callbacks: wandb.yaml #wandb.yaml
+  - override /logger: wandb.yaml # wandb.yaml
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 
 # name of the run determines folder name in logs
 # it's also accessed by loggers
-name: "mnist_detection_experiment"
+name: "full_run"
 
 seed: 100101101112115101101107046097105
 
