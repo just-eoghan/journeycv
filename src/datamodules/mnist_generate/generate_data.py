@@ -160,11 +160,7 @@ def generate_dataset(dataset_type: str,
             {
             "id": 9,
             "name": "nine"
-            },
-            {
-            "id": 10,
-            "name": "ten"
-            },
+            }
         ],              
     }
     image_dir.mkdir(exist_ok=True, parents=True)

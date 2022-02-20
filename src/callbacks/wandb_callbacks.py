@@ -179,7 +179,6 @@ class LogBoundingBoxes(Callback):
                 "seven": 7,
                 "eight": 8,
                 "nine": 9,
-                "ten": 10
             }
 
             image_classes = [{"id": int(v), "name": k} for k, v in class_dict.items()]

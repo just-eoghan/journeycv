@@ -2,7 +2,7 @@ _target_: src.datamodules.mnist_detection_datamodule.MnistDetectionDataModule
 
 data_dir: ${data_dir}/mnist_detection_data/ # data_dir is specified in config.yaml
 batch_size: 4
-num_classes: 11
+num_classes: 10
 num_workers: 0
 pin_memory: False
 num_generated_train: 10000
