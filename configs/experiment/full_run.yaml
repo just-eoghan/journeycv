@@ -16,7 +16,7 @@ defaults:
 
 # name of the run determines folder name in logs
 # it's also accessed by loggers
-name: "full_run"
+name: "full_run_final"
 
 seed: 100101101112115101101107046097105
 
