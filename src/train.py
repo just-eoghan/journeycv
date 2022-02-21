@@ -77,11 +77,14 @@ def train(config: DictConfig) -> Optional[float]:
         lr_finder = trainer.tuner.lr_find(model=model, datamodule=datamodule)
         new_lr = lr_finder.suggestion()
         model.hparams.lr = new_lr
+        config.model.lr = new_lr
 
     if config.get("batch_finder"):
         new_batch_size = trainer.tuner.scale_batch_size(model=model, datamodule=datamodule)
         model.hparams.batch_size = new_batch_size
-
+        config.datamodule.batch_size = new_batch_size
+        config.model.batch_size = new_batch_size
+        
     # Train the model
     log.info("Starting training!")
     trainer.fit(model=model, datamodule=datamodule)
