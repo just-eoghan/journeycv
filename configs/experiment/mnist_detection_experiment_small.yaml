@@ -16,7 +16,7 @@ defaults:
 
 # name of the run determines folder name in logs
 # it's also accessed by loggers
-name: "little_twodigit_run"
+name: "little_twodigit_run_v2"
 
 seed: 100101101112115101101107046097105
 
