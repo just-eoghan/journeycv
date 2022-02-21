@@ -21,6 +21,10 @@ A data provenance framework for building better deep learning computer vision pr
   
 Click on [<kbd>Use this template</kbd>](https://github.com/deepseek-eoghan/journeycv/generate) to initialize new repository.
 
+<br>
+  
+Check out the sample wandb dashboard for this run here <a> https://wandb.ai/eoghan/journeycv?workspace=user-eoghan </a>
+  
 </div>
 
 Need to run $ conda install -c anaconda cython running $ pip install -r requirements.text
