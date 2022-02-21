@@ -8,7 +8,7 @@ from PIL import Image
 from src.models.mnist_detection_model import MnistDetectionLitModel
 
 class_dict = {
-    0: "zero",
+    10: "zero",
     1:  "one",
     2:  "two",
     3:  "three",

@@ -122,10 +122,6 @@ def generate_dataset(dataset_type: str,
         },
         "categories": [
             {
-            "id": 0,
-            "name": "zero"
-            },
-            {
             "id": 1,
             "name": "one"
             },
@@ -160,6 +156,10 @@ def generate_dataset(dataset_type: str,
             {
             "id": 9,
             "name": "nine"
+            },
+            {
+            "id": 10,
+            "name": "zero"
             }
         ],              
     }
@@ -202,6 +202,8 @@ def generate_dataset(dataset_type: str,
             }
         )
         for idx, (bbox, label) in enumerate(zip(bboxes, labels)):
+            if label == 0:
+                label = 10
             annotations.append(
                 {
                     "id": ann_idx,

@@ -169,7 +169,6 @@ class LogBoundingBoxes(Callback):
             experiment = logger.experiment
 
             class_dict = {
-                "zero": 0,
                 "one": 1,
                 "two": 2,
                 "three": 3,
@@ -179,6 +178,7 @@ class LogBoundingBoxes(Callback):
                 "seven": 7,
                 "eight": 8,
                 "nine": 9,
+                "zero": 10,
             }
 
             image_classes = [{"id": int(v), "name": k} for k, v in class_dict.items()]
