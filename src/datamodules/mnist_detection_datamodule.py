@@ -50,7 +50,7 @@ class MnistDetectionDataModule(LightningDataModule):
         batch_size: int = 4,
         num_workers: int = 0,
         pin_memory: bool = False,
-        num_classes: int = 11,
+        num_classes: int = 10,
         num_generated_train: int = 10000,
         num_generated_test: int = 1000,
         generated_min_digit_size: int = 15,

@@ -142,7 +142,9 @@ dmypy.json
 # Lightning-Hydra-Template
 configs/local/default.yaml
 data/mnist_detection_data/
+data/mnist_detection_data_150/
 data/mnist_detection_data_300/
+data/mnist_detection_data_no_zero
 logs/
 wandb/
 .env

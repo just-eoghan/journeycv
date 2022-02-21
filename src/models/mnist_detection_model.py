@@ -31,7 +31,7 @@ class MnistDetectionLitModel(LightningModule):
 
     def __init__(
         self,
-        num_classes: int = 11,
+        num_classes: int = 10,
         lr: float = 0.001,
         weight_decay: float = 0.0005,
         momentum: float = 0.9,
