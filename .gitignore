@@ -145,6 +145,7 @@ data/mnist_detection_data/
 data/mnist_detection_data_150/
 data/mnist_detection_data_300/
 data/mnist_detection_data_no_zero
+data/mnist_detection_data_littletwodigit
 logs/
 wandb/
 .env
