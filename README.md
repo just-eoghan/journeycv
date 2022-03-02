@@ -26,7 +26,25 @@ Check out the sample wandb dashboard for this run here <a> https://wandb.ai/eogh
   
 </div>
 
-Need to run $ conda install -c anaconda cython running $ pip install -r requirements.text
+# Introduction
+<p>
+In computer vision it is fair to say that the journey (experimental process) is just as important as the destination (trained model). There are various input and output components which need to be tracked in order to ensure provenance such as hyperparameters, input data and output test metrics. While many deep learning practitioners will likely version control their model architecture through a familiar text based tool such as git or svn, the process for tracking the hyperparameters, dataset, generated model weights and test metrics etc. cannot always be achieved easily using the same methodologies.
+</p>
 
-<br><br>
+![image](https://user-images.githubusercontent.com/82596496/156372962-e915a6ea-f7bf-460d-9331-d4593c1ab93c.png)
 
+# Getting Started
+
+Follow these steps to set up the repository
+
+```
+# clone the project
+git clone https://github.com/deepseek-eoghan/journeycv
+cd journeycv
+
+conda create -n journeycv python=3.8
+conda activate journeycv
+
+conda install -c anaconda cython
+pip install -r requirements.txt
+```
