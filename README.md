@@ -27,7 +27,7 @@ Check out the sample wandb dashboard for this run here <a> https://wandb.ai/eogh
 </div>
 
 # Introduction
-<p>
+<p style="text-align: justify">
 In computer vision it is fair to say that the journey (experimental process) is just as important as the destination (trained model). There are various input and output components which need to be tracked in order to ensure provenance such as hyperparameters, input data and output test metrics. While many deep learning practitioners will likely version control their model architecture through a familiar text based tool such as git or svn, the process for tracking the hyperparameters, dataset, generated model weights and test metrics etc. cannot always be achieved easily using the same methodologies.
 </p>
 
@@ -50,7 +50,7 @@ pip install -r requirements.txt
 ```
 
 # Framework structure
-
+```
 ├── configs                 <- Hydra configuration files
 │   ├── callbacks               <- Callbacks configs
 │   ├── datamodule              <- Datamodule configs
@@ -82,4 +82,25 @@ pip install -r requirements.txt
 ├── setup.cfg               <- Configurations of linters and pytest
 ├── requirements.txt        <- File for installing python dependencies
 └── README.md
+```
+
+# How it works / Extending for your project
+<p style="text-align: justify">
+An end to end high-level run-through of executing experiments using our framework demonstrates how this workflow achieves provenance for computer vision experiments. As this is a high level overview the inner working of the blocks will be described in the framework structure section later on in the paper. The process starts by writing the source code which is broken into three different parts. Firstly, one must write a datamodule to download, transform and pass data to the model. Secondly, a lightning module which is essentially the model is written. Finally, callbacks which encompass any ancillary code such as logging or notifications is written. Datamodules and models are passed a hyperparameter object which encompasses all the configuration data. 
+
+Configuration files are created with key value pairs to pass to the source code. Initially base configurations are created. Finally specialized configuration files named “experiments” are written which override the base configurations to tailor the run to a specific scheme.
+</p>
+
+![image](https://user-images.githubusercontent.com/82596496/156375991-eebc8338-37d1-4544-b59a-6d1aa6a9b6e9.png)
+
+<p style="text-align: justify">
+At this point the framework is ready to be run and a job can be started by simply calling the following command;
+</p>
+
+```
+python run.py experiment=your_experiment
+```
+<p style="text-align: justify" >
+Once the run has started, because cloud based logging is included in the framework, all configuration parameters are written to an immutable run file and metrics such as test set loss and validation accuracy are updated to the cloud on each epoch. Once the run is finished and the final logs have been compiled there exists a record of the run containing all the provenance information for the run. This run history can be used to prove results or to easily reproduce them.
+</p>
 
