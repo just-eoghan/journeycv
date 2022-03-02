@@ -104,3 +104,5 @@ python run.py experiment=your_experiment
 Once the run has started, because cloud based logging is included in the framework, all configuration parameters are written to an immutable run file and metrics such as test set loss and validation accuracy are updated to the cloud on each epoch. Once the run is finished and the final logs have been compiled there exists a record of the run containing all the provenance information for the run. This run history can be used to prove results or to easily reproduce them.
 </p>
 
+# Credits
+This project was generated with  <a href="https://github.com/ashleve/lightning-hydra-template"><img alt="Template" src="https://img.shields.io/badge/-Lightning--Hydra--Template-017F2F?style=flat&logo=github&labelColor=gray"></a><br>
