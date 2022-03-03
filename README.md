@@ -22,7 +22,7 @@ Click on [<kbd>Use this template</kbd>](https://github.com/deepseek-eoghan/journ
 
 <br>
   
-Check out the sample wandb dashboard for this run here <a> https://wandb.ai/6097105/eccv_submission </a>
+Check out the sample wandb dashboard for this run here <a> https://wandb.ai/6097105/example_run </a>
   
 </div>
 
