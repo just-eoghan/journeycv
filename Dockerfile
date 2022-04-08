@@ -34,6 +34,8 @@ RUN conda create -n ${CONDA_ENV_NAME} python=${PYTHON_VERSION}
 # Switch to bash shell
 SHELL ["/bin/bash", "-c"]
 
+RUN conda install -c anaconda cython
+
 # Install requirements
 COPY requirements.txt ./
 RUN source activate ${CONDA_ENV_NAME} \
