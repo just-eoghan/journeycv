@@ -35,6 +35,7 @@ RUN conda create -n ${CONDA_ENV_NAME} python=${PYTHON_VERSION}
 SHELL ["/bin/bash", "-c"]
 
 RUN conda install -c anaconda cython
+RUN conda install -c anaconda numpy=1.17
 
 # Install requirements
 COPY requirements.txt ./
