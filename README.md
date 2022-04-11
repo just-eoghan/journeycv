@@ -46,9 +46,12 @@ conda create -n journeycv python=3.8
 conda activate journeycv
 
 conda install -c anaconda cython
-conda install -c anaconda numpy=1.17
 pip install -r requirements.txt
+
+This can't be included in the requirements file as it has pre-install dependencies.
+pip install git+https://github.com/philferriere/cocoapi.git#egg=pycocotools&subdirectory=PythonAPI
 ```
+
 
 # Framework structure
 ```

@@ -30,4 +30,4 @@ jupyterlab      # better jupyter notebooks
 pudb            # debugger
 albumentations # image transforms
 whos-there      # get a notification when your training is complete
-git+https://github.com/philferriere/cocoapi.git#egg=pycocotools&subdirectory=PythonAPI # pycocotools
+numpy==1.17.5
