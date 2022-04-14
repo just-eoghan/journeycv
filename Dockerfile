@@ -42,7 +42,7 @@ RUN source activate ${CONDA_ENV_NAME} \
     && pip install --no-cache-dir -r requirements.txt \
     && rm requirements.txt
 
-RUN pip install git+https://github.com/philferriere/cocoapi.git#egg=pycocotools&subdirectory=PythonAPI
+RUN pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
 
 # Set ${CONDA_ENV_NAME} to default virutal environment
 RUN echo "source activate ${CONDA_ENV_NAME}" >> ~/.bashrc

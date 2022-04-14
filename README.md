@@ -49,7 +49,7 @@ conda install -c anaconda cython
 pip install -r requirements.txt
 
 This can't be included in the requirements file as it has pre-install dependencies.
-pip install git+https://github.com/philferriere/cocoapi.git#egg=pycocotools&subdirectory=PythonAPI
+pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
 ```
 
 
